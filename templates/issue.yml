@@ -24,5 +24,7 @@ schedule:daily:stale-issue:
 
 schedule:month:stale-issue:
   <<: *triage
+  before_script:
+  - [[ `date '+%d'` == 01 ]] && echo "Run" || exit 0
   variables:
     GITLAB_TRIAGE_FILE: policies/stale-issues.yml
