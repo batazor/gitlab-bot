@@ -1,0 +1,28 @@
+.job_template_triage: &triage
+  stage: triage
+  image: ruby:2.4-alpine
+  before_script:
+  - gem install gitlab-triage --no-doc
+  script:
+  - gitlab-triage \
+    -H https://code.rightech.io \
+    -r ./lib/extension \
+    -f $GITLAB_TRIAGE_FILE \
+    --token $DANGER_GITLAB_API_TOKEN \
+    --source $TRIAGE_SOURCE_TYPE \
+    --source-id $CI_PROJECT_ID
+  only:
+  - schedules
+  retry: 2
+  tags:
+  - docker
+
+schedule:daily:stale-issue:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: policies/issues-unlabelled.yml
+
+schedule:month:stale-issue:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: policies/stale-issues.yml

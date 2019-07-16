@@ -1,0 +1,16 @@
+resource_rules:
+  issues:
+    rules:
+      - name: Comment 1 week old, unlabelled issues
+        conditions:
+          date:
+            attribute: created_at
+            condition: older_than
+            interval_type: weeks
+            interval: 1
+          labels:
+            - None
+          state: opened
+        actions:
+          comment: |
+            This issue has been open for one week and is unlabelled @all

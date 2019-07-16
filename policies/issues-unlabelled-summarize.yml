@@ -1,0 +1,34 @@
+resource_rules:
+  issues:
+    summaries:
+      - name: Newest and oldest issues summary
+        actions:
+          summarize:
+            title: "Newest and oldest {{type}} summary"
+            summary: |
+              Please triage the following {{type}}:
+
+              {{items}}
+
+              Please take care of them before the end of #{1.months.from_now.strftime('%Y-%m-%d')}
+
+              /label ~"needs attention"
+        rules:
+          - name: New issues
+            conditions:
+              state: opened
+            limits:
+              most_recent: 2
+            actions:
+              summarize:
+                item: "- [ ] [{{title}}]({{web_url}}) {{labels}}"
+                summary: "Please triage the following new {{type}}:\n\n{{items}}"
+          - name: Old issues
+            conditions:
+              state: opened
+            limits:
+              oldest: 2
+            actions:
+              summarize:
+                item: "- [ ] [{{title}}]({{web_url}}) {{labels}}"
+                summary: "Please triage the following old {{type}}:\n\n{{items}}"
