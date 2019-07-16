@@ -20,6 +20,11 @@ include:
     ref: master
     file: '/templates/issue.yml'
 
+# Add variable
+variables:
+  CI_PROJECT_ID: 24
+  GITLAB_API_TOKEN: <secret-from-gitlab-variable>
+
 # Add stage
 stages:
   - triage
