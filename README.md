@@ -8,7 +8,11 @@
 git submodule add git@code.rightech.io:rightech-devops/gitlab-bot.git ops/policy
 ```
 
-**2. Include gitlab-bot-template to `.gitlab-ci.yml`**
+**2. Add ENV variables**
+
+`GITLAB_API_TOKEN` - token for GitLab API
+
+**3. Include gitlab-bot-template to `.gitlab-ci.yml`**
 
 > docs: https://docs.gitlab.com/ee/ci/yaml/#include
 
@@ -25,11 +29,11 @@ stages:
   - triage
 ```
 
-**3. Add jobs to schedule for project**
+**4. Add jobs to schedule for project**
 
 > docs: https://docs.gitlab.com/ee/user/project/pipelines/schedules.html
 
-**4. Add labels to project/group**
+**5. Add labels to project/group**
 
 + `needs attention` - bot add this a label to issue for *attention*
 

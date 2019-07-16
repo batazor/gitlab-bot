@@ -13,8 +13,7 @@
     -H https://code.rightech.io \
     -r ./lib/extension \
     -f $GITLAB_TRIAGE_FILE \
-    --token $DANGER_GITLAB_API_TOKEN \
-    --source $TRIAGE_SOURCE_TYPE \
+    --token $GITLAB_API_TOKEN \
     --source-id $CI_PROJECT_ID
   only:
   - schedules
