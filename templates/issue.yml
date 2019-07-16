@@ -4,6 +4,7 @@
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   before_script:
+  - apk add --update git
   - git submodule sync --recursive
   - git submodule update --init --recursive
   - gem install gitlab-triage --no-doc
