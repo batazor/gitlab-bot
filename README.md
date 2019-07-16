@@ -29,8 +29,13 @@ stages:
 
 > docs: https://docs.gitlab.com/ee/user/project/pipelines/schedules.html
 
-Use [`schedules.md`](./schedules.md) as helper.
-
 **4. Add labels to project/group**
 
 + `needs attention` - bot add this a label to issue for *attention*
+
+### Update
+
+```
+git submodule sync --recursive
+git submodule update --init --recursive
+```

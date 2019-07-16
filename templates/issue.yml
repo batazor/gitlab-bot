@@ -1,7 +1,11 @@
 .job_template_triage: &triage
   stage: triage
   image: ruby:2.4-alpine
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
   - gem install gitlab-triage --no-doc
   script:
   - gitlab-triage \
@@ -17,12 +21,12 @@
   tags:
   - docker
 
-schedule:daily:stale-issue:
+schedule:daily:issues-unlabelled:
   <<: *triage
   variables:
     GITLAB_TRIAGE_FILE: policies/issues-unlabelled.yml
 
-schedule:month:stale-issue:
+schedule:month:stale-issues:
   <<: *triage
   before_script:
   - export isFirstDay=`date '+%d'`
