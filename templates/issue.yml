@@ -9,6 +9,7 @@
   - git submodule update --init --recursive
   - gem install gitlab-triage --no-doc
   script:
+  - env
   - gitlab-triage
     -H https://code.rightech.io
     -r ./lib/extension
