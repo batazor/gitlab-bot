@@ -22,10 +22,13 @@
   tags:
   - docker
 
+variables:
+  PATH_TO_POLICY: ops
+
 schedule:daily:issues-unlabelled:
   <<: *triage
   variables:
-    GITLAB_TRIAGE_FILE: policies/issues-unlabelled.yml
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/issues-unlabelled.yml
 
 schedule:month:stale-issues:
   <<: *triage
@@ -33,4 +36,4 @@ schedule:month:stale-issues:
   - export isFirstDay=`date '+%d'`
   - ([[ isFirstDay == 01 ]]) && echo "Run" || exit 0
   variables:
-    GITLAB_TRIAGE_FILE: policies/stale-issues.yml
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/stale-issues.yml

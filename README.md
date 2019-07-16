@@ -11,6 +11,7 @@ git submodule add git@code.rightech.io:rightech-devops/gitlab-bot.git ops/policy
 **2. Add ENV variables**
 
 `GITLAB_API_TOKEN` - token for GitLab API
+`PATH_TO_POLICY` - path to policy into your project (default: `/ops`)
 
 **3. Include gitlab-bot-template to `.gitlab-ci.yml`**
 
