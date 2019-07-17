@@ -11,10 +11,10 @@
   script:
   - gitlab-triage
     -H https://code.rightech.io
-    -r $PATH_TO_POLICY/lib/extension
     -f $GITLAB_TRIAGE_FILE
     --token $GITLAB_API_TOKEN
     --source-id $CI_PROJECT_ID
+    # -r $PATH_TO_POLICY/lib/extension
   only:
   - schedules
   retry: 2
