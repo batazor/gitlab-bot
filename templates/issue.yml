@@ -23,7 +23,7 @@
   - docker
 
 variables:
-  PATH_TO_POLICY: ops
+  PATH_TO_POLICY: ops/policy
 
 schedule:daily:issues-unlabelled:
   <<: *triage
