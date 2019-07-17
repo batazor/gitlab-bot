@@ -24,6 +24,8 @@
 variables:
   PATH_TO_POLICY: ops/policy
 
+# DAILY ========================================================================
+
 schedule:daily:issues-unlabelled:
   <<: *triage
   variables:
@@ -32,10 +34,28 @@ schedule:daily:issues-unlabelled:
     variables:
       - $RUN_DAILY
 
+schedule:daily:merge-requests-new:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/merge-requests-new.yml
+  only:
+    variables:
+      - $RUN_DAILY
+
+# MONTH ========================================================================
+
 schedule:month:stale-issues:
   <<: *triage
   variables:
     GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/stale-issues.yml
+  only:
+    variables:
+      - $RUN_MONTH
+
+schedule:month:merge-request-slate:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/merge-request-slate.yml
   only:
     variables:
       - $RUN_MONTH

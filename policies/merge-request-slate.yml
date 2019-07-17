@@ -10,31 +10,9 @@ resource_rules:
   merge_requests:
     summaries:
       - rules:
-          - name: Fresh contributions
-            conditions:
-              state: opened
-            <<: *common_limits
-            actions:
-              summarize:
-                <<: *common_summary_rule_actions
-                summary: |
-                  Here is a list of merge requests that were opened recently.
-
-                  These Merge Requests were chosen, as they meet the following criteria:
-                  * Open
-                  * No labels
-
-                  We'd like to ask you to determine whether:
-                  * The MR is ready or further changes are required
-                  * The MR should be assigned to a reviewer
-                  * The MR should be closed down
-
-                  {{items}}
           - name: Stale contributions
             conditions:
               state: opened
-              labels:
-                - Community contribution
               date:
                 attribute: updated_at
                 condition: older_than
@@ -56,4 +34,4 @@ resource_rules:
                   * The MR should be taken over by the team
                   * The MR should be closed down
 
-                  {{items}}
+                  {{items}} @all
