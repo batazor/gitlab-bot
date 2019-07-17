@@ -34,6 +34,11 @@ stages:
 
 > docs: https://docs.gitlab.com/ee/user/project/pipelines/schedules.html
 
+Add variables:
+- `RUN_DAILY` - for everyday
+- `RUN_WEEKS` - for weeks
+- `RUN_MONTH` - for month
+
 **5. Add labels to project/group**
 
 + `needs attention` - bot add this a label to issue for *attention*
