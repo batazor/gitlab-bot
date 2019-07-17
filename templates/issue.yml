@@ -28,6 +28,10 @@ schedule:daily:issues-unlabelled:
   <<: *triage
   variables:
     GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/issues-unlabelled.yml
+  only:
+    variables:
+      - $RUN_DAILY
+
 
 schedule:month:stale-issues:
   <<: *triage
@@ -36,3 +40,6 @@ schedule:month:stale-issues:
   - ([[ isFirstDay == 01 ]]) && echo "Run" || exit 0
   variables:
     GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/stale-issues.yml
+  only:
+    variables:
+      - $RUN_MONTH
