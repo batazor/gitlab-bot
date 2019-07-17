@@ -35,9 +35,9 @@ stages:
 > docs: https://docs.gitlab.com/ee/user/project/pipelines/schedules.html
 
 Add variables:
-- `RUN_DAILY` - for everyday
-- `RUN_WEEKS` - for weeks
-- `RUN_MONTH` - for month
+- `RUN_DAILY: true` - for everyday `gitlab-bot (every day)`
+- `RUN_WEEKS: true` - for weeks `gitlab-bot (every week)`
+- `RUN_MONTH: true` - for month `gitlab-bot (every month)`
 
 **5. Add labels to project/group**
 

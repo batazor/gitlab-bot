@@ -32,7 +32,6 @@ schedule:daily:issues-unlabelled:
     variables:
       - $RUN_DAILY
 
-
 schedule:month:stale-issues:
   <<: *triage
   variables:
