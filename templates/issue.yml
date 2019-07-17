@@ -35,9 +35,6 @@ schedule:daily:issues-unlabelled:
 
 schedule:month:stale-issues:
   <<: *triage
-  before_script:
-  - export isFirstDay=`date '+%d'`
-  - ([[ isFirstDay == 01 ]]) && echo "Run" || exit 0
   variables:
     GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/stale-issues.yml
   only:
