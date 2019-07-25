@@ -1,5 +1,7 @@
 # gitlab-bot
 
+Automation of routine operations in GitLab (issue && MR lifecycle)
+
 ### How add to my project?
 
 **1. Add this proejct as git submodule**
