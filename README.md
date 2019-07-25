@@ -10,9 +10,9 @@ git submodule add git@<URL>/gitlab-bot.git ops/policy
 
 **2. Add ENV variables**
 
-`GITLAB_HOST_URL` - GitLab address `https://gitlab.com`
-`GITLAB_API_TOKEN` - token for GitLab API
-`PATH_TO_POLICY` - path to policy into your project (default: `/ops/policy`)
+`GITLAB_HOST_URL` - GitLab address `https://gitlab.com`  
+`GITLAB_API_TOKEN` - token for GitLab API  
+`PATH_TO_POLICY` - path to policy into your project (default: `/ops/policy`)  
 `TYPE_SOURCE` - `project` or `groups` (default: `groups`)
 
 **3. Include gitlab-bot-template to `.gitlab-ci.yml`**
