@@ -42,6 +42,15 @@ schedule:daily:merge-requests-new:
     variables:
       - $RUN_DAILY
 
+# WEEK =========================================================================
+schedule:daily:issues-unlabelled:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/move-milestone-forward.yml
+  only:
+    variables:
+      - $RUN_WEEKS
+
 # MONTH ========================================================================
 
 schedule:month:stale-issues:
