@@ -1,0 +1,87 @@
+.move_milestone: &move_milestone
+  name: Move resources with outdated milestone to newer milestone
+  conditions:
+    state: opened
+    milestone: any
+    ruby: |
+      return false if milestone.nil? || milestone.active?
+
+      all_active = milestone.__send__(:all_active_with_start_date)
+
+      version_milestones =
+        all_active.select do |m|
+          m.title.match?(/\A\d+\.\d+\z/) # So we don't pick 2019
+        end
+
+      version_milestones.first
+  actions:
+    comment: |
+      #{
+        all_active = milestone.__send__(:all_active_with_start_date)
+
+        version_milestones =
+          all_active.select do |m|
+            m.title.match?(/\A\d+\.\d+\z/) # So we don't pick 2019
+          end
+
+        develop_milestone = version_milestones.first
+
+        nil
+      }
+
+      /milestone %"#{develop_milestone.title}"
+      /label ~"missed:#{milestone.title}"
+    summarize:
+      item: |
+        1. {{web_url}} {{title}} {{labels}}
+      title: Automatically rescheduled {{type}}
+      summary: |
+        The following were rescheduled because the previous milestone was
+        already closed:
+
+        {{items}}
+
+        Please reschedule accordingly if they're wrong.
+
+        /label ~Quality ~meta ~"auto closed"
+
+.close_report: &close_report
+  name: Close the report
+  conditions:
+    state: opened
+    labels:
+      - Quality
+      - meta
+      - auto closed
+  actions:
+    comment: |
+      #{
+        all_active = Milestone.new(
+          { group_id: network.options.source_id[%r{\A[^/]+}] },
+          parent: self
+        ).__send__(:all_active_with_start_date)
+
+        version_milestones =
+          all_active.select do |m|
+            m.title.match?(/\A\d+\.\d+\z/) # So we don't pick 2019
+          end
+
+        develop_milestone = version_milestones.first
+
+        nil
+      }
+
+      /title Automatically rescheduled to #{develop_milestone.title}
+      /unlabel ~"auto closed"
+      /close
+
+resource_rules:
+  issues:
+    rules:
+      - *move_milestone
+      - *close_report
+
+  merge_requests:
+    rules:
+      - *move_milestone
+      - *close_report

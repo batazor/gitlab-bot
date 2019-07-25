@@ -1,0 +1,34 @@
+.common_limits: &common_limits
+  limits:
+    most_recent: 20
+
+.common_summary_rule_actions: &common_summary_rule_actions
+  item: |
+    - [ ] !#{resource[:iid]} {{title}} {{labels}}
+
+resource_rules:
+  merge_requests:
+    summaries:
+      - rules:
+          - name: New contributions
+            conditions:
+              state: opened
+              labels:
+                - None
+            <<: *common_limits
+            actions:
+              summarize:
+                <<: *common_summary_rule_actions
+                summary: |
+                  Here is a list of merge requests that were opened recently.
+
+                  These Merge Requests were chosen, as they meet the following criteria:
+                  * Open
+                  * No labels
+
+                  We'd like to ask you to determine whether:
+                  * The MR is ready or further changes are required
+                  * The MR should be assigned to a reviewer
+                  * The MR should be closed down
+
+                  {{items}} @all

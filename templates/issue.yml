@@ -10,8 +10,9 @@
   - gem install gitlab-triage --no-doc
   script:
   - gitlab-triage
-    -H https://code.rightech.io
+    -H $GITLAB_HOST_URL
     -f $GITLAB_TRIAGE_FILE
+    --source $TYPE_SOURCE
     --token $GITLAB_API_TOKEN
     --source-id $CI_PROJECT_ID
     # -r $PATH_TO_POLICY/lib/extension
@@ -22,7 +23,10 @@
   - docker
 
 variables:
+  TYPE_SOURCE: groups
   PATH_TO_POLICY: ops/policy
+
+# DAILY ========================================================================
 
 schedule:daily:issues-unlabelled:
   <<: *triage
@@ -32,10 +36,37 @@ schedule:daily:issues-unlabelled:
     variables:
       - $RUN_DAILY
 
+schedule:daily:merge-requests-new:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/merge-requests-new.yml
+  only:
+    variables:
+      - $RUN_DAILY
+
+# WEEK =========================================================================
+schedule:daily:issues-unlabelled:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/move-milestone-forward.yml
+  only:
+    variables:
+      - $RUN_WEEKS
+
+# MONTH ========================================================================
+
 schedule:month:stale-issues:
   <<: *triage
   variables:
     GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/stale-issues.yml
+  only:
+    variables:
+      - $RUN_MONTH
+
+schedule:month:merge-request-slate:
+  <<: *triage
+  variables:
+    GITLAB_TRIAGE_FILE: $PATH_TO_POLICY/policies/merge-request-slate.yml
   only:
     variables:
       - $RUN_MONTH
