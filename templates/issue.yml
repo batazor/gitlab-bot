@@ -10,7 +10,7 @@
   - gem install gitlab-triage --no-doc
   script:
   - gitlab-triage
-    -H https://code.rightech.io
+    -H $GITLAB_HOST_URL
     -f $GITLAB_TRIAGE_FILE
     --token $GITLAB_API_TOKEN
     --source-id $CI_PROJECT_ID

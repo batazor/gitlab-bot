@@ -5,11 +5,12 @@
 **1. Add this proejct as git submodule**
 
 ```
-git submodule add git@code.rightech.io:rightech-devops/gitlab-bot.git ops/policy
+git submodule add git@<URL>/gitlab-bot.git ops/policy
 ```
 
 **2. Add ENV variables**
 
+`GITLAB_HOST_URL` - GitLab address `https://gitlab.com` 
 `GITLAB_API_TOKEN` - token for GitLab API
 `PATH_TO_POLICY` - path to policy into your project (default: `/ops/policy`)
 
@@ -21,7 +22,7 @@ git submodule add git@code.rightech.io:rightech-devops/gitlab-bot.git ops/policy
 ```yaml
 # include template
 include:
-  - project: 'rightech-devops/gitlab-bot'
+  - project: 'batazor/gitlab-bot'
     ref: master
     file: '/templates/issue.yml'
 
