@@ -12,6 +12,7 @@
   - gitlab-triage
     -H $GITLAB_HOST_URL
     -f $GITLAB_TRIAGE_FILE
+    --source $TYPE_SOURCE
     --token $GITLAB_API_TOKEN
     --source-id $CI_PROJECT_ID
     # -r $PATH_TO_POLICY/lib/extension
@@ -22,6 +23,7 @@
   - docker
 
 variables:
+  TYPE_SOURCE: groups
   PATH_TO_POLICY: ops/policy
 
 # DAILY ========================================================================
